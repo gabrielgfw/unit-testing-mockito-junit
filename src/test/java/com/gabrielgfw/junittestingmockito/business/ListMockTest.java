@@ -7,7 +7,7 @@ import org.mockito.Mockito;
 import java.util.List;
 
 public class ListMockTest {
-    List mock = Mockito.mock(List.class);
+    List<String> mock = Mockito.mock(List.class);
 
     @Test
     public void size_basic() {
@@ -32,5 +32,18 @@ public class ListMockTest {
     public void returnWithGenericParameters() {
         Mockito.when(mock.get(Mockito.anyInt())).thenReturn("Werner");
         Assertions.assertEquals("Werner", mock.get(2));
+    }
+
+    @Test
+    public void verificationBasics() {
+        String value = mock.get(0);
+        String value2 = mock.get(0);
+
+        // Checking min number of invocations of specific method (get)
+        Mockito.verify(mock, Mockito.atLeast(1)).get(0);
+        // Checking number of invocations of specific method (get)
+        Mockito.verify(mock, Mockito.times(2)).get(Mockito.anyInt());
+        // Checking if the specific argument were never called (parameter in this case)
+        Mockito.verify(mock, Mockito.never()).get(3);
     }
 }
