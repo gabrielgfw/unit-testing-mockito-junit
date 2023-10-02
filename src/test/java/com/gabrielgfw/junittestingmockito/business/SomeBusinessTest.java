@@ -4,17 +4,19 @@ import com.gabrielgfw.junittestingmockito.data.SomeDataService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 
+@ExtendWith(MockitoExtension.class)
 public class SomeBusinessTest {
-    SomeBusinessImpl business = new SomeBusinessImpl();
-    SomeDataService dataServiceMock = Mockito.mock(SomeDataService.class);
-
-    @BeforeEach
-    public void before() {
-        business.setSomeDataService(dataServiceMock);
-    }
+    @InjectMocks
+    SomeBusinessImpl business;
+    @Mock
+    SomeDataService dataServiceMock;
 
     @Test
     public void calculateSum_basic() {
