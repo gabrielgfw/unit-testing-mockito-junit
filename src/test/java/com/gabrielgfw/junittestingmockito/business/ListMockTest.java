@@ -27,4 +27,10 @@ public class ListMockTest {
         Mockito.when(mock.get(0)).thenReturn("Werner");
         Assertions.assertEquals("Werner", mock.get(0));
     }
+
+    @Test
+    public void returnWithGenericParameters() {
+        Mockito.when(mock.get(Mockito.anyInt())).thenReturn("Werner");
+        Assertions.assertEquals("Werner", mock.get(2));
+    }
 }
